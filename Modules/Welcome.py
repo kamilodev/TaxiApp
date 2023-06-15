@@ -15,11 +15,14 @@ class Welcome:
         os.system("cls" if os.name == "nt" else "clear")
         result = text2art("                               TaxiApp", font="small")
         print(f"{yellow}{result}")
-        print(f"{green}\n                                  Bienvenido, pulse Enter para ingresar{reset}")
-    
+        print(
+            f"{green}\n                                 👉 Bienvenido, pulse Enter para ingresar 👈{reset}"
+        )
+
+
 class AppInstructions:
     def __init__(self):
-        self.title_color = yellow # Color para el título
+        self.title_color = yellow  # Color para el título
         self.text_color = green  # Color para el texto
         self.bullet_point = "\u2756"  # Viñeta
 
@@ -27,9 +30,14 @@ class AppInstructions:
         print(f"{color}{text}{attr('reset')}")
 
     def display_title(self):
-        self.print_formatted_text("\n\n\u2728 La TaxiApp es una aplicación que simula un taxímetro y calcula el precio final de una carrera teniendo en cuenta dos tarifas:", self.title_color)
-        self.print_formatted_text("    una para cuando el vehículo está en movimiento y otra para cuando está detenido.", self.title_color)
-
+        self.print_formatted_text(
+            "\n\n\u2728 La TaxiApp es una aplicación que simula un taxímetro y calcula el precio final de una carrera teniendo en cuenta dos tarifas:",
+            self.title_color,
+        )
+        self.print_formatted_text(
+            "    una para cuando el vehículo está en movimiento y otra para cuando está detenido.",
+            self.title_color,
+        )
 
     def display_instructions(self):
         print("\nInstrucciones:")
@@ -39,6 +47,6 @@ class AppInstructions:
         instructions += f"\n\n{self.bullet_point}   Para finalizar la carrera, presiona la tecla 'Enter'. La aplicación mostrará en pantalla el total a pagar en euros."
         instructions += f"\n\n{self.bullet_point}   La aplicación quedará en espera, lista para iniciar una nueva carrera cuando se presione nuevamente la tecla 'Enter'."
         self.print_formatted_text(instructions, self.text_color)
-        print("\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!")
-
-
+        print(
+            "\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!"
+        )

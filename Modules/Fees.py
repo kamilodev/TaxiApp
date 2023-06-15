@@ -10,20 +10,17 @@ class Fees:
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0
+        self.start_message = "Inicio de carrera, El taxi esta detenido, pulsa <space> para ponerlo en marcha\n"
 
     def fee_stoped(self):
-        print("Tarifa detenido")
-        # self.chrono.history_timer()
         self.total_stopped_time += self.chrono.history_timer()
 
     def fee_movement(self):
-        print("Tarifa movimiento")
-        # self.chrono.history_timer()
         self.total_movement_time += self.chrono.history_timer()
 
     def init_end_move(self):
         if self.state == True:
-            print("Inicio de carrera, tarifa detenido\n")
+            print(self.start_message)
             self.chrono.history_timer()
             self.state = False
 
