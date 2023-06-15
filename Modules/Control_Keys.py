@@ -9,23 +9,29 @@ class Control_Keys:
         self.send_fee = Fees()
 
     def toggle_fee(self):
-        if self.is_move == False:
+        if self.is_move:
             self.send_fee.fee_stoped()
         else:
             self.send_fee.fee_movement()
 
     def new_travel_fee(self):
-        print("new_travel_fee")
+        if not self.is_new_travel:
+            self.send_fee.init_end_move()
+            self.is_new_travel = True
+        else:
+            self.send_fee.end_travel()
+            return False
 
     def on_press(self, key):
         if key == keyboard.Key.space:
-            self.is_move = False if self.is_move else True
+            self.is_move = not self.is_move
             self.toggle_fee()
 
         elif key == keyboard.Key.enter:
-            self.is_move = False
-            self.is_new_travel = True
-            self.new_travel_fee()
+            if not self.is_new_travel:
+                self.new_travel_fee()
+            else:
+                return self.new_travel_fee()
 
     def on_release(self, key):
         if key == keyboard.Key.esc:
@@ -35,8 +41,6 @@ class Control_Keys:
         listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)
         listener.start()
         listener.join()
-
-        self.toggle_fee() if self.is_move else self.toggle_fee()
 
         if self.is_new_travel:
             self.new_travel_fee()

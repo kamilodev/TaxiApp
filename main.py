@@ -12,11 +12,8 @@ def main():
     instructions.display_title()
     instructions.display_instructions()
 
-   
-
-
     control_keys.run()
-    
+
 
 if __name__ == "__main__":
     main()
