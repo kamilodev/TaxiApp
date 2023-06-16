@@ -12,7 +12,6 @@ class Timer:
             self.lapnum += 1
             self.starttime = time.time()
             self.lasttime = self.starttime
-
         else:
             laptime = round((time.time() - self.lasttime), 2)
 
