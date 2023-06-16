@@ -31,7 +31,7 @@ class Control_Keys:
             if not self.is_new_travel:
                 self.new_travel_fee()
             else:
-                return self.new_travel_fee()
+                return False
 
     def on_release(self, key):
         if key == keyboard.Key.esc:
