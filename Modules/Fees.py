@@ -6,7 +6,6 @@ class Fees:
     def __init__(self):
         self.print = Print_Values()
         self.chrono = Timer()
-        self.state = True
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0
@@ -19,10 +18,8 @@ class Fees:
         self.total_movement_time += self.chrono.history_timer()
 
     def init_end_move(self):
-        if self.state == True:
-            print(self.start_message)
-            self.chrono.history_timer()
-            self.state = False
+        print(self.start_message)
+        self.chrono.history_timer()
 
     def end_travel(self):
         if self.chrono.lapnum % 2 == 0:
