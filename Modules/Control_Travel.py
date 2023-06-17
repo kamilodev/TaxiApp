@@ -1,7 +1,7 @@
 from Modules.Fees import Fees
 
 
-class Control_Keys:
+class Control_Travel:
     def __init__(self):
         self.send_fee = Fees()
         self.is_move = False

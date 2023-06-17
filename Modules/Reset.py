@@ -1,11 +1,11 @@
-from Modules.Control_Keys import Control_Keys
+from Modules.Control_Travel import Control_Travel
 from Modules.Fees import Fees
 from Modules.Timer import Timer
 
 
 class Reset:
     def __init__(self):
-        self.reset_keys = Control_Keys()
+        self.reset_keys = Control_Travel()
         self.reset_fees = Fees()
         self.reset_timer = Timer()
 

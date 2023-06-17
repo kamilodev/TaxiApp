@@ -1,7 +1,6 @@
 from art import text2art
 import os
 from colored import fg, bg, attr
-import unicodedata
 
 # Definir colores
 red = fg("red")
@@ -18,7 +17,6 @@ class Welcome:
         print(
             f"{green}\n                                 👉 Bienvenido, pulse Enter para ingresar 👈{reset}"
         )
-
 
 class AppInstructions:
     def __init__(self):
@@ -50,3 +48,9 @@ class AppInstructions:
         print(
             "\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!"
         )
+        
+    def main_screen(self):
+        welcome = Welcome()
+        welcome.display_welcome_screen()
+        self.display_title()
+        self.display_instructions()
