@@ -32,4 +32,4 @@ class Fees:
             self.total_stopped_time, self.total_movement_time, self.total_time
         )
 
-        return False
+        # return False
