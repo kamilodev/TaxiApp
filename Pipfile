@@ -7,9 +7,9 @@ name = "pypi"
 pynput = "*"
 colored = "*"
 art = "*"
-unicodedata = "*"
+asyncio = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
