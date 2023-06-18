@@ -1,12 +1,13 @@
 from Modules.Timer import Timer
 from Modules.Prices import Prices
 from Modules.History import History
-from Modules.Print_Values import Print_Values
+from Modules.PrintValues import PrintValues
+
 
 class Fees:
     def __init__(self):
         self.chrono = Timer()
-        self.printer = Print_Values()
+        self.printer = PrintValues()
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0

@@ -1,7 +1,8 @@
 #from Modules.Reset import Reset
+import time
 import json
 
-class Print_Values:
+class PrintValues:
     def __init__(self):
         self.total_price = 0
 
@@ -27,3 +28,4 @@ class Print_Values:
         print(f"\n\nTotal tarifa en reposo: {bill_stop}€")
         print(f"Total tarifa en movimiento: {bill_move}€")
         print(f"Total a pagar: {bill_total}€")
+        #time.sleep(10)

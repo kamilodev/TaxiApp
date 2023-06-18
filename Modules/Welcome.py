@@ -1,31 +1,32 @@
 from art import text2art
 import os
-from colored import fg, bg, attr
+from colorama import Fore, Style
 
 # Definir colores
-red = fg("red")
-green = fg("green")
-yellow = fg("yellow")
-reset = attr("reset")
+red = Fore.RED
+green = Fore.GREEN
+cyan = Fore.CYAN
+reset = Style.RESET_ALL
 
 
 class Welcome:
     def display_welcome_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
         result = text2art("                               TaxiApp", font="small")
-        print(f"{yellow}{result}")
+        print(f"{cyan}{result}")
         print(
             f"{green}\n                                 👉 Bienvenido, pulse Enter para ingresar 👈{reset}"
         )
 
+
 class AppInstructions:
     def __init__(self):
-        self.title_color = yellow  # Color para el título
+        self.title_color = cyan  # Color para el título
         self.text_color = green  # Color para el texto
         self.bullet_point = "\u2756"  # Viñeta
 
     def print_formatted_text(self, text, color):
-        print(f"{color}{text}{attr('reset')}")
+        print(f"{color}{text}{reset}")
 
     def display_title(self):
         self.print_formatted_text(
@@ -48,9 +49,20 @@ class AppInstructions:
         print(
             "\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!"
         )
-        
+
+    def again(self):
+        user_input = input('Pulsa Enter para calcular otro viaje')
+        if user_input == "":
+            pass
+        else:
+            return False
+
     def main_screen(self):
         welcome = Welcome()
         welcome.display_welcome_screen()
         self.display_title()
         self.display_instructions()
+
+
+#instructions = AppInstructions()
+#instructions.main_screen()

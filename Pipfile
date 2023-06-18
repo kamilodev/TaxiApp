@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pynput = "*"
-colored = "*"
+colorama = "*"
 art = "*"
 asyncio = "*"
 
