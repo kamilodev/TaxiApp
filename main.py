@@ -1,9 +1,10 @@
 #!/usr/bin/python3
+import time
 
 from Modules.Welcome import AppInstructions
 from Modules.Control_Travel import Control_Travel
 from pynput import keyboard
-import time
+import warnings, sys
 
 
 class Navigate:
@@ -44,15 +45,22 @@ def main():
     navigate = Navigate()
     
     welcome.main_screen()
-    navigate.run()
+    with open('warnings.log', 'w') as f:
+        # Redirigir los warnings a un archivo
+        warnings.filterwarnings('always')
+        warnings.showwarning = lambda *args, **kwargs: None
+        sys.stderr = f
 
+        navigate.run()
+
+    sys.stderr = sys.__stderr__
 
 if __name__ == "__main__":
     main.navigate = None
     while True:
         if main.navigate is None:
-            time.sleep(10)
             main()
+            time.sleep(10)
         else:
             print("Entre en el else")
             main.navigate.run()

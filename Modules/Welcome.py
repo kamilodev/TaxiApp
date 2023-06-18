@@ -48,7 +48,14 @@ class AppInstructions:
         print(
             "\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!"
         )
-        
+    
+    def again(self):
+        user_input = input('Pulsa Enter para calcular otro viaje')
+        if user_input == "":
+            pass
+        else:
+            return False
+
     def main_screen(self):
         welcome = Welcome()
         welcome.display_welcome_screen()
