@@ -20,4 +20,5 @@ class Control_Travel:
             self.is_new_travel = True
         else:
             self.send_fee.end_travel()
+            #input("Pulsa alguna tecla para continuar...")
             return False
