@@ -1,4 +1,5 @@
 #from Modules.Reset import Reset
+import time
 import json
 
 class PrintValues:
@@ -27,3 +28,5 @@ class PrintValues:
         print(f"\n\nTotal tarifa en reposo: {bill_stop}€")
         print(f"Total tarifa en movimiento: {bill_move}€")
         print(f"Total a pagar: {bill_total}€")
+        #time.sleep(10)
+

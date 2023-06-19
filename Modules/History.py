@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 class History:
 	def __init__(self, total_time, stop_time, move_time, bill_stop, bill_move, bill_total):
@@ -9,9 +10,15 @@ class History:
 		self.bill_stop = bill_stop
 		self.bill_move = bill_move
 		self.bill_total = bill_total
+		self.today = datetime.now().strftime("%d-%m-%Y")
+		self.hour = datetime.now().strftime("%H:%M")
+		self.id = id(self.hour)
 
 	def to_json(self):
 		data = {
+			"id": self.id,
+			"today": self.today,
+			"hour": self.hour,
 			"total_time": self.total_time,
 			"total_stopped_time": self.stop_time,
 			"total_movement_time": self.move_time,
@@ -19,7 +26,7 @@ class History:
 			"total_bill_move": self.bill_move,
 			"total_bill_total": self.bill_total,
 		}
-		return json.dumps(data)
+		return json.dumps(data, indent=4)
 	
 	def save_history_to_file(self, json_data):
 		if not os.path.isfile('history.json'):
@@ -51,4 +58,3 @@ class History:
 		# Cerrar la lista de objetos JSON en el archivo
 		with open('history.json', 'a') as file:
 			file.write(']')
-

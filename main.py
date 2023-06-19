@@ -67,6 +67,7 @@ if __name__ == "__main__":
     while True:
         if main.navigate is None:
             main()
+            time.sleep(10)
         else:
             print("Entre en el else")
             main.navigate.run()

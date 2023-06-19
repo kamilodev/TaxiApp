@@ -4,6 +4,7 @@ from Modules.History import History
 #from Modules.PrintValues import PrintValues
 
 
+
 class Fees:
     def __init__(self):
         self.chrono = Timer()
@@ -48,3 +49,4 @@ class Fees:
         json_data = history.to_json()
         history.save_history_to_file(json_data)
         #self.printer.show_info()
+
