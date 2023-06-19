@@ -1,13 +1,14 @@
 from Modules.Timer import Timer
 from Modules.Prices import Prices
 from Modules.History import History
-from Modules.PrintValues import PrintValues
+#from Modules.PrintValues import PrintValues
+
 
 
 class Fees:
     def __init__(self):
         self.chrono = Timer()
-        self.printer = PrintValues()
+        #self.printer = PrintValues()
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0
@@ -47,4 +48,5 @@ class Fees:
 
         json_data = history.to_json()
         history.save_history_to_file(json_data)
-        self.printer.show_info()
+        #self.printer.show_info()
+

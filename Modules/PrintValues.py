@@ -29,3 +29,4 @@ class PrintValues:
         print(f"Total tarifa en movimiento: {bill_move}€")
         print(f"Total a pagar: {bill_total}€")
         #time.sleep(10)
+
