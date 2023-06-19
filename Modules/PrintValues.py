@@ -2,7 +2,7 @@
 import time
 import json
 
-class Print_Values:
+class PrintValues:
     def __init__(self):
         self.total_price = 0
 
