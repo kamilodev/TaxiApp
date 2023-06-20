@@ -1,6 +1,10 @@
 from art import text2art
 import os
 from colorama import Fore, Style
+import cv2
+from PIL import Image
+import numpy as np
+import shutil
 
 # Definir colores
 red = Fore.RED
@@ -10,13 +14,46 @@ reset = Style.RESET_ALL
 
 
 class Welcome:
+    def __init__(self):
+        self.image_path = "taxi.jpg"
+
+    def display_image(self):
+        try:
+            # Abrir la imagen utilizando Pillow
+            image = Image.open(self.image_path)
+
+            # Convertir la imagen a una matriz NumPy
+            image_np = np.array(image)
+
+            # Redimensionar la imagen utilizando OpenCV
+            terminal_size = (80, 24)  # Tamaño de la terminal en caracteres
+            resized_image = cv2.resize(image_np, terminal_size)
+
+            # Obtener los píxeles de la imagen redimensionada
+            pixels = resized_image.tolist()
+
+            # Imprimir los píxeles en la terminal
+            for row in pixels:
+                for pixel in row:
+                    # Obtener el color del píxel
+                    r, g, b = pixel
+
+                    # Imprimir el carácter ANSI correspondiente al color del píxel
+                    print(
+                        f"\033[48;2;{r};{g};{b}m \033[0m", end=""
+                    )  # Imprimir espacio en color
+
+                print()  # Salto de línea al final de cada fila
+
+        except IOError:
+            print("No se pudo abrir la imagen.")
+
     def display_welcome_screen(self):
         os.system("cls" if os.name == "nt" else "clear")
-        result = text2art("                               TaxiApp", font="small")
-        print(f"{cyan}{result}")
-        print(
-            f"{green}\n                                 👉 Bienvenido, pulse Enter para ingresar 👈{reset}"
-        )
+        result = text2art("TaxiApp", font="small")
+
+        print(f"{cyan}{result}{reset}")
+        self.display_image()
 
 
 class AppInstructions:
@@ -26,12 +63,12 @@ class AppInstructions:
         self.bullet_point = "\u2756"  # Viñeta
 
     def print_formatted_text(self, text, color):
-        print(f"{color}{text}{reset}")
+        print(f"\n{color}{text}{reset}")
 
     def display_title(self):
         self.print_formatted_text(
-            "\n\n\u2728 La TaxiApp es una aplicación que simula un taxímetro y calcula el precio final de una carrera teniendo en cuenta dos tarifas:",
-            self.title_color,
+            "🌟 TaxiApp es un taxímetro que calcula el precio final de una carrera, teniendo en cuenta dos tarifas: 🌟",
+            red,
         )
         self.print_formatted_text(
             "    una para cuando el vehículo está en movimiento y otra para cuando está detenido.",
@@ -50,8 +87,16 @@ class AppInstructions:
             "\nDe esta manera, podrás utilizar la TaxiApp para simular tus carreras y conocer el precio estimado de cada una. ¡Disfruta de tu viaje!"
         )
 
+        welcome_text = " 👉 Bienvenido, pulse Enter para ingresar 👈 "
+        line_width = shutil.get_terminal_size()[0]
+        max_width = int(line_width * 0.98)
+        if len(welcome_text) > max_width:
+            max_width = len(welcome_text)
+        centered_text = welcome_text.center(max_width, "-")
+        print(f"{green}\n{centered_text}{reset}")
+
     def again(self):
-        user_input = input('Pulsa Enter para calcular otro viaje')
+        user_input = input("Pulsa Enter para calcular otro viaje")
         if user_input == "":
             pass
         else:
@@ -63,6 +108,5 @@ class AppInstructions:
         self.display_title()
         self.display_instructions()
 
-
-#instructions = AppInstructions()
-#instructions.main_screen()
+# instructions = AppInstructions()
+# instructions.main_screen()

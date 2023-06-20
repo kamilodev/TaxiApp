@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-import time
 
-from Modules.Welcome import AppInstructions
-from Modules.Control_Travel import Control_Travel
-from Modules.PrintValues import PrintValues
+from Views.Welcome import AppInstructions
+from Controllers.Control_Travel import Control_Travel
+from Views.PrintValues import PrintValues
 from pynput import keyboard
 import warnings, sys
 
@@ -13,6 +12,7 @@ class Navigate:
         self.control_keys = Control_Travel()
         self.counter = 0
         self.printer = PrintValues()
+
 
     def on_press(self, key):
         if key == keyboard.Key.space:
@@ -67,7 +67,6 @@ if __name__ == "__main__":
     while True:
         if main.navigate is None:
             main()
-            time.sleep(10)
         else:
             print("Entre en el else")
             main.navigate.run()

@@ -18,7 +18,6 @@ class Timer:
             totaltime = round((time.time() - self.starttime), 2)
 
             print("* " * 20)
-            # Printing the lap number, lap-time, and total time
             print(f"Tramo {str(self.lapnum)}")
             if self.lapnum % 2 != 0:
                 print(f"Tiempo tramo taxi detenido: {str(laptime)}")
@@ -29,7 +28,6 @@ class Timer:
             print("* " * 20)
             print("\n")
 
-            # Updating the previous total time and lap number
             self.lasttime = time.time()
             self.lapnum += 1
             return laptime
