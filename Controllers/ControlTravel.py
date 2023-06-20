@@ -1,7 +1,7 @@
 from Controllers.Fees import Fees
 
 
-class Control_Travel:
+class ControlTravel:
     def __init__(self):
         self.send_fee = Fees()
         self.is_move = False
@@ -20,6 +20,6 @@ class Control_Travel:
             self.is_new_travel = True
         else:
             data=self.send_fee.end_travel()
-            json_data = data.to_json()
+            json_data = data.data_to_json()
             data.save_history_to_file(json_data)
             return False
