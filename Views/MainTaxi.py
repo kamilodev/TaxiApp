@@ -9,7 +9,7 @@ def main():
     navigate = Navigate()
 
     welcome.main_screen()
-    with open("warnings.log", "w") as f:
+    with open("../warnings.log", "w") as f:
         # Redirigir los warnings a un archivo
         warnings.filterwarnings("always")
         warnings.showwarning = lambda *args, **kwargs: None
@@ -18,8 +18,3 @@ def main():
         navigate.run()
 
     sys.stderr = sys.__stderr__
-
-
-if __name__ == "__main__":
-    while True:
-        main()
