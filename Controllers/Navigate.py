@@ -1,13 +1,14 @@
-from Controllers.Control_Travel import Control_Travel
+from Controllers.ControlTravel import ControlTravel
 from Views.PrintValues import PrintValues
 from pynput import keyboard
 
 
 class Navigate:
     def __init__(self):
-        self.control_keys = Control_Travel()
+        self.control_keys = ControlTravel()
         self.counter = 0
         self.printer = PrintValues()
+        self.navigate_message = "\n🚖 Pulsa enter para un nuevo viaje 🚖"
 
     def on_press(self, key):
         if key == keyboard.Key.space:
@@ -32,8 +33,7 @@ class Navigate:
             self.control_keys.new_travel_fee()
             self.printer.show_info()
             self.counter += 1
-            input("Tienes que pulsar enter para continuar...")
-            print(self.counter)
+            input(self.navigate_message)
 
     def run(self):
         listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)

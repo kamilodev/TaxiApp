@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-class History:
+class DataTrip:
 	def __init__(self, total_time, stop_time, move_time, bill_stop, bill_move, bill_total):
 		self.total_time = total_time
 		self.stop_time = stop_time
@@ -14,7 +14,7 @@ class History:
 		self.hour = datetime.now().strftime("%H:%M")
 		self.id = id(self.hour)
 
-	def to_json(self):
+	def data_to_json(self):
 		data = {
 			"id": self.id,
 			"today": self.today,
