@@ -8,6 +8,9 @@ pynput = "*"
 colorama = "*"
 art = "*"
 asyncio = "*"
+numpy="*"
+opencv-python="*"
+Pillow="*"
 
 [dev-packages]
 

@@ -1,14 +1,13 @@
-from Modules.Timer import Timer
-from Modules.Prices import Prices
-from Modules.History import History
-#from Modules.PrintValues import PrintValues
+from Views.Timer import Timer
+from Controllers.Prices import Prices
+from Models.History import History
+
 
 
 
 class Fees:
     def __init__(self):
         self.chrono = Timer()
-        #self.printer = PrintValues()
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0
@@ -36,8 +35,7 @@ class Fees:
         bill_stop, bill_move, total_bill = prices.ticket(
             self.total_stopped_time, self.total_movement_time
         )
-
-        history = History(
+        return History(
             round(self.total_time, 2),
             round(self.total_stopped_time, 2),
             round(self.total_movement_time, 2),
@@ -45,8 +43,3 @@ class Fees:
             bill_move,
             total_bill,
         )
-
-        json_data = history.to_json()
-        history.save_history_to_file(json_data)
-        #self.printer.show_info()
-
