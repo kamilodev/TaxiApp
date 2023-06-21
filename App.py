@@ -1,10 +1,12 @@
-import inquirer
 from Views import MainTaxi
+from PyInquirer import prompt
 
 questions = [
-    inquirer.List(
-        "options",
-        choices=[
+    {
+        "type": "list",
+        "name": "Options",
+        "message": "Selecciona una opción",
+        "choices": [
             "Iniciar el taximetro",
             "Cambiar la contraseña",
             "Cambia el precio de las tarifas",
@@ -14,14 +16,14 @@ questions = [
             "Ver la documentación",
             "Salir",
         ],
-        carousel=False,
-    )
+    }
 ]
 
-answers = inquirer.prompt(questions)
-
-if answers["options"] == "Iniciar el taximetro":
+answers = prompt(questions)
+if answers["Options"] == "Iniciar el taximetro":
     MainTaxi.main()
+else:
+    pass
 
 if __name__ == "__main__":
     while True:
