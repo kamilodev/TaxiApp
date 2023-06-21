@@ -11,7 +11,7 @@ asyncio = "*"
 numpy="*"
 opencv-python="*"
 Pillow="*"
-inquirer = "*"
+pyinquirer = "*"
 
 [dev-packages]
 
