@@ -23,13 +23,10 @@ class Navigate:
                 return False
             self.initial()
 
-        if key == keyboard.Key.down:
-            Options.print_options()
-
     def on_release(self, key):
         if key == keyboard.Key.esc:
             Options.print_options()
-            # return False
+            return False
 
     def initial(self):
         if not self.control_keys.is_new_travel and self.counter % 2 == 0:
