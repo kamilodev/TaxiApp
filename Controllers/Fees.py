@@ -8,7 +8,7 @@ class Fees:
         self.total_time = 0
         self.total_stopped_time = 0
         self.total_movement_time = 0
-        self.start_message = "\nTaximetro en marcha, El taxi esta detenido 🛑\npulsa <space> para alternar las marchas\n"
+        self.start_message = "\nTaximetro en marcha, El taxi esta detenido 🛑\npulsa <Control> para alternar las marchas\n"
 
     def fee_stoped(self):
         self.total_stopped_time += self.chrono.history_timer()
