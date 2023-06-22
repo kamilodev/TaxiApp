@@ -1,30 +1,17 @@
-from Views import MainTaxi
-from PyInquirer import prompt
+from Views import Options
 
-questions = [
-    {
-        "type": "list",
-        "name": "Options",
-        "message": "Selecciona una opción",
-        "choices": [
-            "Iniciar el taximetro",
-            "Cambiar la contraseña",
-            "Cambia el precio de las tarifas",
-            "Ver el historico de trayectos",
-            "Eliminar el historico de trayectos",
-            "Realiza los test",
-            "Ver la documentación",
-            "Salir",
-        ],
-    }
-]
+class App:
+    def __init__(self):
+        self.auth = True
 
-answers = prompt(questions)
-if answers["Options"] == "Iniciar el taximetro":
-    MainTaxi.main()
-else:
-    pass
+    def run(self):
+        if self.auth == False:
+            input("Presiona Enter para ingresar...")
+            Options.print_options()
+        else:
+            Options.print_options()
+
 
 if __name__ == "__main__":
-    while True:
-        MainTaxi.main()
+    app = App()
+    app.run()

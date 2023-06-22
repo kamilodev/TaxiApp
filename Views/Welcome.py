@@ -46,7 +46,7 @@ class Welcome:
 class AppInstructions:
     def __init__(self):
         self.title_color = cyan
-        self.text_color = Fore.LIGHTRED_EX
+        self.text_color = Fore.LIGHTBLUE_EX
 
     def print_formatted_text(self, text, color):
         print(f"\n{color}{text}{reset}")
@@ -63,27 +63,21 @@ class AppInstructions:
 
     def display_instructions(self):
         print(f"\n{bold}{underline}Instrucciones:{reset}\n")
-        instructions = f"\n✅ Para iniciar una carrera, presiona la tecla 'Enter'. En este momento, la aplicación comenzará a calcular el precio con la tarifa de 'detenido'."
-        instructions += f"\n\n✅ Cada vez que el vehículo se ponga en movimiento, presiona la tecla 'Espacio' y calculará con la tarifa 'en movimiento'."
-        instructions += f"\n\n✅ Cuando el vehículo se detenga, presiona nuevamente la tecla 'Espacio'. La aplicación se detendrá y calculará el precio utilizando la tarifa de 'detenido'."
-        instructions += f"\n\n✅ Para finalizar la carrera, presiona la tecla 'Enter'. La aplicación mostrará en pantalla el total a pagar en euros."
-        instructions += f"\n\n✅ La aplicación quedará en espera, lista para iniciar una nueva carrera cuando se presione nuevamente la tecla 'Enter'."
+        instructions = f"\nEl funcionamiento es básico, la App calculará el tiempo que el taxi permanezca detenido, como en un semáforo, o un atasco,\ny el tiempo que este en marcha durante el viaje."
+        instructions += f"\n\nAl final te muestra un resumen de los tiempos, y el coste total a pagar"
+        instructions += f"\n\nMandos:"
+        instructions += f"\n⚙️ <Shift> Inicia / Detiene el viaje"
+        instructions += f"\n⚙️ <Ctrl> En marcha / Detenerse"
+        instructions += f"\n⚙️ <Esc> Regresa al menu principal"
         self.print_formatted_text(instructions, self.text_color)
 
-        welcome_text = " 👉 Bienvenido, pulse Enter para ingresar 👈 "
+        welcome_text = " 👉 Bienvenido, pulsa <Shift> para iniciar 👈 "
         line_width = shutil.get_terminal_size()[0]
         max_width = int(line_width * 0.98)
         if len(welcome_text) > max_width:
             max_width = len(welcome_text)
         centered_text = welcome_text.center(max_width, "-")
         print(f"{green}\n{centered_text}{reset}")
-
-    def again(self):
-        user_input = input("Pulsa Enter para calcular otro viaje")
-        if user_input == "":
-            pass
-        else:
-            return False
 
     def main_screen(self):
         welcome = Welcome()
