@@ -12,6 +12,7 @@ numpy="*"
 opencv-python="*"
 Pillow="*"
 pyinquirer = "*"
+terminaltables = "*"
 
 [dev-packages]
 

@@ -1,12 +1,15 @@
-import sys
-
 from PyInquirer import prompt
 import os
 from Views.MainTaxi import MainTaxi
+from Views.NewPrices import NewPrices
+
+
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def print_options():
-    os.system("cls" if os.name == "nt" else "clear")
+    send_prices = NewPrices()
 
     while True:
         questions = [
@@ -34,7 +37,9 @@ def print_options():
         elif answers["Options"] == "Cambiar la contraseña":
             print("¡Hey, quieres cambiar la contraseña!")
         elif answers["Options"] == "Cambiar el precio de las tarifas":
-            print("¡Hey, quieres cambiar el precio de las tarifas!")
+            clear_screen()
+            send_prices.get_new_prices()
+            clear_screen()
         elif answers["Options"] == "Ver el histórico de trayectos":
             print("¡Hey, quieres ver el histórico de trayectos!")
         elif answers["Options"] == "Eliminar el histórico de trayectos":
