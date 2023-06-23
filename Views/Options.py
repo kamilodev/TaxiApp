@@ -9,6 +9,7 @@ def clear_screen():
 
 
 def print_options():
+    clear_screen()
     send_prices = NewPrices()
 
     while True:
