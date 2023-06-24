@@ -1,8 +1,8 @@
-import os
 from PyInquirer import prompt
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
-from Controllers.ControlHistory import control_history
+import os
+
 
 
 def clear_screen():
@@ -10,7 +10,11 @@ def clear_screen():
 
 
 def print_options():
+    from Controllers.LoginAuth import LoginAuth
+
+    clear_screen()
     send_prices = NewPrices()
+    change_password = LoginAuth()
     while True:
         questions = [
             {
@@ -35,11 +39,9 @@ def print_options():
         if answers["Options"] == "Iniciar el taxímetro":
             MainTaxi().main()
         elif answers["Options"] == "Cambiar la contraseña":
-            print("¡Hey, quieres cambiar la contraseña!")
+            change_password.change_password()
         elif answers["Options"] == "Cambiar el precio de las tarifas":
-            clear_screen()
             send_prices.get_new_prices()
-            clear_screen()
         elif answers["Options"] == "Ver el histórico de trayectos":
             clear_screen()
             control_history("show")
@@ -47,9 +49,9 @@ def print_options():
             clear_screen()
             control_history("delete")
         elif answers["Options"] == "Realizar los tests":
-            print("¡Hey, quieres realizar los tests!")
+            pass
         elif answers["Options"] == "Ver la documentación":
-            print("¡Hey, quieres ver la documentación!")
+            pass
         elif answers["Options"] == "Salir":
             os._exit(0)
 
