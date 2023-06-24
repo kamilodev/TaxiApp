@@ -1,16 +1,16 @@
 from art import text2art
-import os
 from colorama import Fore, Style, init
-import cv2
 from PIL import Image
+import cv2
 import numpy as np
+import os
 import shutil
 
 init()
 green = Fore.GREEN
 cyan = Fore.CYAN
 reset = Style.RESET_ALL
-bold = '\033[1m'
+bold = "\033[1m"
 underline = "\033[4m"
 
 
