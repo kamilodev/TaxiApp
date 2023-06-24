@@ -4,6 +4,7 @@ from Views.NewPrices import NewPrices
 import os
 
 
+
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -14,7 +15,6 @@ def print_options():
     clear_screen()
     send_prices = NewPrices()
     change_password = LoginAuth()
-
     while True:
         questions = [
             {
@@ -43,9 +43,11 @@ def print_options():
         elif answers["Options"] == "Cambiar el precio de las tarifas":
             send_prices.get_new_prices()
         elif answers["Options"] == "Ver el histórico de trayectos":
-            pass
+            clear_screen()
+            control_history("show")
         elif answers["Options"] == "Eliminar el histórico de trayectos":
-            pass
+            clear_screen()
+            control_history("delete")
         elif answers["Options"] == "Realizar los tests":
             pass
         elif answers["Options"] == "Ver la documentación":
