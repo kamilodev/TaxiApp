@@ -12,6 +12,8 @@ numpy="*"
 opencv-python="*"
 Pillow="*"
 pyinquirer = "*"
+pymongo = "*"
+reportlab = "*"
 
 [dev-packages]
 
