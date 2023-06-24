@@ -19,7 +19,7 @@ class ControlTravel:
             self.send_fee.init_end_move()
             self.is_new_travel = True
         else:
-            data=self.send_fee.end_travel()
+            data = self.send_fee.end_travel()
             json_data = data.data_to_json()
             data.save_history_to_file(json_data)
             return False

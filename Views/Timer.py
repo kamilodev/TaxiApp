@@ -7,7 +7,7 @@ class Timer:
         self.lasttime = self.starttime
         self.lapnum = 0
 
-    def history_timer(self):
+    def history_timer(self) -> float:
         if self.lapnum == 0:
             self.lapnum += 1
             self.starttime = time.time()

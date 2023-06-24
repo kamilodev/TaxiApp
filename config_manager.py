@@ -8,7 +8,7 @@ def create_config_file():
     save_config(config)
 
 
-def load_config():
+def load_config() -> dict:
     try:
         with open(CONFIG_FILE, "r") as file:
             return json.load(file)
