@@ -13,7 +13,7 @@ class Navigate:
         self.back_menu = "\n📕 Pulsa <Esc> para ir al menu principal 📕"
 
     def on_press(self, key):
-        if key == keyboard.Key.ctrl:
+        if key == keyboard.Key.ctrl_l:
             if self.counter == 1:
                 self.control_keys.is_move = not self.control_keys.is_move
                 self.control_keys.toggle_fee()

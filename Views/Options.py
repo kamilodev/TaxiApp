@@ -1,7 +1,8 @@
-from PyInquirer import prompt
 import os
+from PyInquirer import prompt
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
+from Controllers.ControlHistory import control_history
 
 
 def clear_screen():
@@ -10,7 +11,6 @@ def clear_screen():
 
 def print_options():
     send_prices = NewPrices()
-
     while True:
         questions = [
             {
@@ -41,9 +41,11 @@ def print_options():
             send_prices.get_new_prices()
             clear_screen()
         elif answers["Options"] == "Ver el histórico de trayectos":
-            print("¡Hey, quieres ver el histórico de trayectos!")
+            clear_screen()
+            control_history("show")
         elif answers["Options"] == "Eliminar el histórico de trayectos":
-            print("¡Hey, quieres eliminar el histórico de trayectos!")
+            clear_screen()
+            control_history("delete")
         elif answers["Options"] == "Realizar los tests":
             print("¡Hey, quieres realizar los tests!")
         elif answers["Options"] == "Ver la documentación":
