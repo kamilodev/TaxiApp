@@ -1,6 +1,6 @@
 from Controllers.Prices import Prices
+from Controllers.AuxFunctions import clear_screen
 import time
-import os
 
 
 class NewPrices:
@@ -13,11 +13,8 @@ class NewPrices:
             "error": "🤙 Error al guardar los datos",
         }
 
-    def clear_screen():
-        os.system("cls" if os.name == "nt" else "clear")
-
     def get_new_prices(self):
-        NewPrices.clear_screen()
+        clear_screen()
         stop = float(input(self.messages["new_stop"]))
         move = float(input(self.messages["new_move"]))
 
@@ -25,8 +22,8 @@ class NewPrices:
             self.reset_prices.set_new_prices(stop, move)
             print(self.messages["success"])
             time.sleep(2)
-            NewPrices.clear_screen()
+            clear_screen()
         except:
             print(self.messages["error"])
             time.sleep(2)
-            self.clear_screen()
+            clear_screen()

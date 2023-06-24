@@ -1,6 +1,5 @@
-from Controllers.ControlTravel import ControlTravel
-from Views.PrintValues import PrintValues
 from Views import Options
+from Controllers.ControlTravel import ControlTravel
 from pynput import keyboard
 
 
@@ -8,7 +7,6 @@ class Navigate:
     def __init__(self):
         self.control_keys = ControlTravel()
         self.counter = 0
-        self.printer = PrintValues()
         self.navigate_message = "\n🚖 Pulsa <Shift> para un nuevo viaje 🚖"
         self.back_menu = "\n📕 Pulsa <Esc> para ir al menu principal 📕"
 
@@ -34,7 +32,6 @@ class Navigate:
             self.counter += 1
         elif self.counter % 2 != 0:
             self.control_keys.new_travel_fee()
-            self.printer.show_info()
             self.counter += 1
             print(self.navigate_message, self.back_menu)
 

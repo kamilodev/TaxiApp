@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-from Controllers.Navigate import Navigate
 from Views.Welcome import AppInstructions
-import warnings, sys
+from Controllers.Navigate import Navigate
+import sys
+import warnings
 
 
 class MainTaxi:

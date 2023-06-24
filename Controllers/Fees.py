@@ -1,6 +1,6 @@
+from Models.DataTrip import DataTrip
 from Views.Timer import Timer
 from Controllers.Prices import Prices
-from Models.DataTrip import DataTrip
 
 
 class Fees:
@@ -22,7 +22,7 @@ class Fees:
         self.chrono.history_timer()
 
     def seconds_to_minutes(self, seconds):
-        minutes = round(seconds // 60, 2)
+        minutes = seconds // 60
         remaining_seconds = round(seconds % 60, 2)
         if minutes == 1:
             minutes_str = " minuto"
@@ -34,9 +34,10 @@ class Fees:
         else:
             seconds_str = " segundos"
 
-        result = (
-            f"{int(minutes)} {minutes_str} y {int(remaining_seconds)} {seconds_str}"
-        )
+        if minutes > 1:
+            result = f"{minutes}{minutes_str} y {remaining_seconds}{seconds_str}"
+        else:
+            result = f"{remaining_seconds}{seconds_str}"
         return result
 
     def end_travel(self):

@@ -1,5 +1,5 @@
-import json
 from config_manager import load_config
+import json
 
 
 class Prices:
