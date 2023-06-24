@@ -20,6 +20,7 @@ class MainTaxi:
 
             sys.stderr = sys.__stderr__
 
+
 if __name__ == "__main__":
     main_taxi = MainTaxi()
     main_taxi.main()

@@ -2,6 +2,7 @@ from Views.Timer import Timer
 from Controllers.Prices import Prices
 from Models.DataTrip import DataTrip
 
+
 class Fees:
     def __init__(self):
         self.chrono = Timer()

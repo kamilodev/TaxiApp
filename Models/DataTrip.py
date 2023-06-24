@@ -31,7 +31,7 @@ class DataTrip:
         }
         return json.dumps(data, indent=4)
 
-    def save_history_to_file(self, json_data):
+    def save_history_to_file(self, json_data: str):
         if not os.path.isfile("history.json"):
             with open("history.json", "w") as file:
                 file.write("[")
