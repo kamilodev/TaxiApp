@@ -1,13 +1,10 @@
-from PyInquirer import prompt
+from Models.DataTrip import DataTrip
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
-from Models.DataTrip import DataTrip
+from Controllers.ControlHistory import control_history
+from Controllers.AuxFunctions import clear_screen
+from PyInquirer import prompt
 import os
-
-
-
-def clear_screen():
-    os.system("cls" if os.name == "nt" else "clear")
 
 
 def print_options():

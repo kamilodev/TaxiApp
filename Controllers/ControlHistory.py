@@ -1,4 +1,3 @@
-from Views.PrintValues import PrintValues
 import os
 import json
 import time
@@ -13,7 +12,10 @@ def control_history(action: str):
     either "delete" or "show"
     """
     if not os.path.isfile("history.json"):
+        os.system("cls" if os.name == "nt" else "clear")
         print("No existe historico")
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
     else:
         if action == "delete":
             confirmation = input(
