@@ -1,15 +1,22 @@
 from PyInquirer import prompt
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
+from Controllers.ControlHistory import *
 import os
 
 
-
 def clear_screen():
+    """
+    The function clears the terminal screen in Python.
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
 def print_options():
+    """
+    This function presents a menu of options to the user and performs different actions based on the
+    user's selection.
+    """
     from Controllers.LoginAuth import LoginAuth
 
     clear_screen()

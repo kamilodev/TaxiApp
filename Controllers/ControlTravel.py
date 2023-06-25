@@ -1,6 +1,7 @@
 from Controllers.Fees import Fees
 
 
+# The ControlTravel class manages the fees for a travel and saves the travel history.
 class ControlTravel:
     def __init__(self):
         self.send_fee = Fees()
@@ -9,12 +10,19 @@ class ControlTravel:
         self.counter = 0
 
     def toggle_fee(self):
+        """
+        The function toggles between stopping and starting a fee based on whether or not there is
+        movement.
+        """
         if self.is_move:
             self.send_fee.fee_stoped()
         else:
             self.send_fee.fee_movement()
 
     def new_travel_fee(self):
+        """
+        The following function checks if there is a new trip and saves the history after the trip has finished.
+        """
         if not self.is_new_travel:
             self.send_fee.init_end_move()
             self.is_new_travel = True
