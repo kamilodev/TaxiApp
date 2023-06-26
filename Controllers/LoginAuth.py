@@ -1,9 +1,12 @@
 from Views.Options import print_options
 from Controllers.AuxFunctions import clear_screen
 from config_manager import load_config, save_config
+from config_logger import setup_logger
 import getpass
 import hashlib
 import time
+
+logger = setup_logger()
 
 
 # The LoginAuth class provides methods for registering and authenticating users, as well as changing
@@ -43,9 +46,11 @@ class LoginAuth:
             self.config["users"].append({"email": email, "password": hashed_password})
             save_config(self.config)
             print(self.responses["register_ok"])
+            logger.info(f"User {email} registered successfully")
             time.sleep(2)
         except:
             print(self.responses["register_error"])
+            logger.warning(f"Error registering user {email}")
             time.sleep(2)
             clear_screen()
             self.register_user()

@@ -1,12 +1,11 @@
-import os
 import json
 import os
 import time
-import logging
 from Controllers.AuxFunctions import clear_screen
 from config_logger import setup_logger
 
 logger = setup_logger()
+
 
 def control_history(action: str):
     """
@@ -18,12 +17,12 @@ def control_history(action: str):
     :type action: str
     """
     clear_screen()
-    logger.info(f"Executing control_history with action: {action}")
+    logger.info(f"User access control_history with action: {action}")
 
     if not os.path.isfile("history.json"):
         clear_screen()
         print("No existe historico")
-        logger.info("No existe historico")
+        logger.info("Try to view history but it does not exist")
         time.sleep(2)
         clear_screen()
     else:
@@ -32,7 +31,7 @@ def control_history(action: str):
         elif action == "show":
             show()
         input("Presione Enter para continuar")
-        os.system("cls" if os.name == "nt" else "clear")
+        clear_screen()
 
 
 def delete():
@@ -47,10 +46,10 @@ def delete():
     if confirmation.lower() == "s":
         os.remove("history.json")
         print("Archivo eliminado")
-        logger.info("Archivo eliminado")
+        logger.info("History file deleted")
     else:
         print("Eliminacion abortada")
-        logger.info("Eliminacion abortada")
+        logger.info("History file deletion aborted")
 
 
 def show():
@@ -64,7 +63,6 @@ def show():
 
     logger.info("Displaying trip history")
     for index, record in enumerate(data, 1):
-        logger.info(f"Trip number: {index}")
         stop_time = record["total_stopped_time"]
         move_time = record["total_movement_time"]
         total_time = record["total_time"]
