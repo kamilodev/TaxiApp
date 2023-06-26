@@ -12,7 +12,7 @@ class MainTaxi:
             navigate = Navigate()
 
             welcome.main_screen()
-            with open("../warnings.log", "w") as f:
+            with open("./warnings.log", "w") as f:
                 warnings.filterwarnings("always")
                 warnings.showwarning = lambda *args, **kwargs: None
                 sys.stderr = f

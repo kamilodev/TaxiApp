@@ -14,6 +14,7 @@ Pillow="*"
 pyinquirer = "*"
 pymongo = "*"
 reportlab = "*"
+rich = "*"
 
 [dev-packages]
 
