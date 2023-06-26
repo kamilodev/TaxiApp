@@ -47,7 +47,7 @@ class Navigate:
         if not self.control_keys.is_new_travel and self.counter % 2 == 0:
             self.control_keys.new_travel_fee()
             self.counter += 1
-        elif self.counter % 2 != 0:
+        else:
             self.control_keys.new_travel_fee()
             self.counter += 1
             print(self.navigate_message, self.back_menu)
