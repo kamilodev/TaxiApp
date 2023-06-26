@@ -4,6 +4,7 @@ from Views.NewPrices import NewPrices
 from Views.Documentation import display_documentation
 from Controllers.ControlHistory import control_history
 from Controllers.AuxFunctions import clear_screen
+from App import run_tests
 from PyInquirer import prompt
 import os
 
@@ -56,7 +57,8 @@ def print_options():
         elif answers["Options"] == "Actualizar la base de datos":
             DataTrip.update_history_to_mongo()
         elif answers["Options"] == "Realizar los tests":
-            pass
+            run_tests()
+            clear_screen()
         elif answers["Options"] == "Ver la documentación":
             display_documentation()
         elif answers["Options"] == "Salir":
