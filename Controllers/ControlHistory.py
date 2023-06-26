@@ -1,15 +1,18 @@
 import os
 import json
+import os
 import time
+from Controllers.AuxFunctions import clear_screen
 
 
 def control_history(action: str):
     """
-    The function `control_history` takes a string parameter `action` and either prints "borrando
-    historico" if `action` is "delete" or "mostrando" if `action` is "show".
+    This function checks if a history file exists and performs an action based on the input, either
+    deleting or showing the history.
 
-    :param action: a string that represents the action to be performed on the control history. It can be
-    either "delete" or "show"
+    :param action: a string parameter that specifies the action to be performed on the history. It can
+    be either "delete" to delete the history or "show" to display the history
+    :type action: str
     """
     if not os.path.isfile("history.json"):
         os.system("cls" if os.name == "nt" else "clear")
@@ -18,21 +21,32 @@ def control_history(action: str):
         os.system("cls" if os.name == "nt" else "clear")
     else:
         if action == "delete":
-            confirmation = input(
-                "¿Está seguro que desea eliminar el archivo de historial? (s/n): "
-            )
-            if confirmation.lower() == "s":
-                os.remove("history.json")
-                print("Archivo eliminado")
-            else:
-                print("Eliminacion abortada")
+            delete()
         elif action == "show":
             show()
         input("Presione Enter para continuar")
         os.system("cls" if os.name == "nt" else "clear")
 
 
+def delete():
+    """
+    This Python function prompts the user for confirmation before deleting a file and prints a message
+    indicating whether the file was deleted or not.
+    """
+    confirmation = input(
+        "¿Está seguro que desea eliminar el archivo de historial? (s/n): "
+    )
+    if confirmation.lower() == "s":
+        os.remove("history.json")
+        print("Archivo eliminado")
+    else:
+        print("Eliminacion abortada")
+
+
 def show():
+    """
+    The function reads data from a JSON file with the history and prints a formatted summary of each record.
+    """
     current_directory = os.path.abspath(os.getcwd())
     file_path = os.path.join(current_directory, "history.json")
     with open(file_path, "r") as file:

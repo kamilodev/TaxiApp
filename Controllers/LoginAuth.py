@@ -6,6 +6,8 @@ import hashlib
 import time
 
 
+# The LoginAuth class provides methods for registering and authenticating users, as well as changing
+# passwords.
 class LoginAuth:
     def __init__(self):
         self.config = load_config()
@@ -27,6 +29,10 @@ class LoginAuth:
         clear_screen()
 
     def register_user(self):
+        """
+        This function registers a user by taking their email and password, hashing the password, and
+        adding the user to a configuration file.
+        """
         clear_screen()
         print(self.messages["register"])
         email = input(self.messages["email"])
@@ -44,7 +50,11 @@ class LoginAuth:
             clear_screen()
             self.register_user()
 
-    def authenticate_user(self):
+    def authenticate_user(self) -> bool:
+        """
+        This function authenticates a user
+        :return: The function `authenticate_user` returns a boolean value (`True` or `False`).
+        """
         clear_screen()
         email = input(self.messages["email"])
         password = getpass.getpass(self.messages["password"])
@@ -59,7 +69,12 @@ class LoginAuth:
         return False
 
     def change_password(self):
+        """
+        This function allows a user to change their password by inputting their email, current password,
+        and new password.
+        """
         clear_screen()
+
         try:
             email = input(self.messages["email"])
             password = getpass.getpass(self.messages["password"])
@@ -84,6 +99,10 @@ class LoginAuth:
             time.sleep(2)
 
     def login_or_register(self):
+        """
+        This function checks if there are any registered users and either registers a new user or
+        authenticates an existing user.
+        """
         if not self.config["users"]:
             self.register_user()
 

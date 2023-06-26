@@ -23,6 +23,11 @@ class DataTrip:
         self.id = id(self.hour)
 
     def data_to_json(self):
+        """
+        This function converts data attributes into a JSON format and returns it as a string.
+        :return: The method `data_to_json` returns a JSON string representation of a dictionary
+        containing various data attributes.
+        """
         data = {
             "id": self.id,
             "today": self.today,
@@ -37,6 +42,13 @@ class DataTrip:
         return json.dumps(data, indent=4)
 
     def save_history_to_file(self, json_data: str):
+        """
+        This function saves JSON data to a file named "history.json" and ensures that the file contains
+        valid JSON format.
+
+        :param json_data: A string containing JSON-formatted data to be saved to a file
+        :type json_data: str
+        """
         if not os.path.isfile("history.json"):
             with open("history.json", "w") as file:
                 file.write("[")
