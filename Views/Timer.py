@@ -1,4 +1,5 @@
 import time
+from config_manager import load_config
 
 
 # The Timer class calculates and prints the elapsed time for each lap and the total time elapsed since
@@ -8,6 +9,10 @@ class Timer:
         self.starttime = time.time()
         self.lasttime = self.starttime
         self.lapnum = 0
+        self.accumulated_euro = 0
+        self.config = load_config()
+        self.stop = self.config["prices"][0]["stop"]
+        self.move = self.config["prices"][0]["move"]
 
     def history_timer(self) -> float:
         """
@@ -28,10 +33,14 @@ class Timer:
             print("* " * 20)
             print(f"Tramo {str(self.lapnum)} 🚩")
             if self.lapnum % 2 != 0:
+                self.accumulated_euro += float(laptime) * self.stop
                 print(f"Tiempo detenido: {str(laptime)}")
             else:
-                print(f"Tiempo en marcha: {str(laptime)}")
-            print(f"Tiempo acumulado: {str(totaltime)}")
+                self.accumulated_euro += float(laptime) * self.move
+                print(f"Tiempo en movimiento: {str(laptime)}")
+            print(
+                f"Tiempo acumulado: {str(totaltime)}\nPrecio acumulado: {self.accumulated_euro:.2f}€"
+            )
 
             print("* " * 20)
             print("\n")
