@@ -1,6 +1,5 @@
 # TaxiApp
 
-"""
 ![TaxiApp](taxi.jpg)
 
 TaxiApp is an interactive tool that simulates the operation of a taximeter used in taxi services. With this application, users can calculate and visualise the cost of a journey based on the distance travelled and the duration of the journey.
@@ -8,7 +7,6 @@ TaxiApp is an interactive tool that simulates the operation of a taximeter used 
 The application uses an algorithm to determine the exact fare for the journey, taking into account both the distance travelled and the duration of the journey. The fare is automatically adjusted according to the status of the taxi, whether it is stopped or in motion. In addition, it offers flexible configuration options such as a per-kilometre fare or a reduced fare while the vehicle is stationary.
 
 It also keeps a record of the history of journeys made, including details such as date, time, distance and corresponding fare. This allows users to keep track of their income and trips.
-"""
 
 ## Installation
 

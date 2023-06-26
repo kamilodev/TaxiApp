@@ -1,5 +1,8 @@
 from config_manager import load_config
 import json
+from config_logger import setup_logger
+
+logger = setup_logger()
 
 
 # The Prices class loads and sets stop and move prices from a configuration file and calculates the
@@ -16,6 +19,7 @@ class Prices:
         self.config = load_config()
         self.stop = self.config["prices"][0]["stop"]
         self.move = self.config["prices"][0]["move"]
+        logger.info("Prices loaded from config file")
 
     def set_new_prices(self, stop: float, move: float):
         """
@@ -32,6 +36,7 @@ class Prices:
         self.config["prices"][0]["move"] = move
         with open(".config", "w") as file:
             json.dump(self.config, file, indent=4)
+            logger.info("New prices set in config file")
 
     def ticket(self, stop_time: float, move_time: float) -> float:
         """
@@ -48,4 +53,5 @@ class Prices:
         bill_move = round(move_time * self.move, 2)
         total_bill = round(bill_stop + bill_move, 2)
 
+        logger.info("Ticket calculated")
         return bill_stop, bill_move, total_bill
