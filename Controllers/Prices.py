@@ -1,5 +1,5 @@
-import json
 from config_manager import load_config
+import json
 
 
 # The Prices class loads and sets stop and move prices from a configuration file and calculates the

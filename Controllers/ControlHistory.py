@@ -1,7 +1,8 @@
+import os
 import json
 import os
 import time
-from Views.PrintValues import PrintValues
+from Controllers.AuxFunctions import clear_screen
 
 
 def control_history(action: str):
@@ -14,7 +15,10 @@ def control_history(action: str):
     :type action: str
     """
     if not os.path.isfile("history.json"):
+        os.system("cls" if os.name == "nt" else "clear")
         print("No existe historico")
+        time.sleep(2)
+        os.system("cls" if os.name == "nt" else "clear")
     else:
         if action == "delete":
             delete()

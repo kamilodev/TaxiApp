@@ -1,6 +1,6 @@
 from Controllers.Prices import Prices
+from Controllers.AuxFunctions import clear_screen
 import time
-import os
 
 
 # The NewPrices class prompts the user to input new stop and move prices, sets them using a method
@@ -15,18 +15,14 @@ class NewPrices:
             "error": "🤙 Error al guardar los datos",
         }
 
-    def clear_screen():
-        """
-        The function clears the terminal screen in Python.
-        """
-        os.system("cls" if os.name == "nt" else "clear")
-
     def get_new_prices(self):
         """
         This function prompts the user to input new stop and move prices, sets them using a method from
         another class, and prints a success or error message.
         """
-        NewPrices.clear_screen()
+        clear_screen()
+
+    def get_new_prices(self):
         stop = float(input(self.messages["new_stop"]))
         move = float(input(self.messages["new_move"]))
 
@@ -34,8 +30,8 @@ class NewPrices:
             self.reset_prices.set_new_prices(stop, move)
             print(self.messages["success"])
             time.sleep(2)
-            NewPrices.clear_screen()
+            clear_screen()
         except:
             print(self.messages["error"])
             time.sleep(2)
-            self.clear_screen()
+            clear_screen()

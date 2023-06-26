@@ -29,7 +29,6 @@ class Timer:
             print(f"Tramo {str(self.lapnum)} 🚩")
             if self.lapnum % 2 != 0:
                 print(f"Tiempo detenido: {str(laptime)}")
-                # TODO aplicar funcion fees.seconds_to_minutes pero dice referencia circular
             else:
                 print(f"Tiempo en marcha: {str(laptime)}")
             print(f"Tiempo acumulado: {str(totaltime)}")

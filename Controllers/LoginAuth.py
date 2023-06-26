@@ -1,9 +1,9 @@
+from Views.Options import print_options
+from Controllers.AuxFunctions import clear_screen
+from config_manager import load_config, save_config
 import getpass
 import hashlib
 import time
-import os
-from config_manager import load_config, save_config
-from Views.Options import print_options
 
 
 # The LoginAuth class provides methods for registering and authenticating users, as well as changing
@@ -26,20 +26,14 @@ class LoginAuth:
             "change_password_error": "👹 Error al actualizar la contraseña, intenta nuevamente",
         }
 
-        self.clear_screen()
-
-    def clear_screen(self):
-        """
-        This function clears the terminal screen.
-        """
-        os.system("cls" if os.name == "nt" else "clear")
+        clear_screen()
 
     def register_user(self):
         """
         This function registers a user by taking their email and password, hashing the password, and
         adding the user to a configuration file.
         """
-        self.clear_screen()
+        clear_screen()
         print(self.messages["register"])
         email = input(self.messages["email"])
         password = getpass.getpass(self.messages["password"])
@@ -53,7 +47,7 @@ class LoginAuth:
         except:
             print(self.responses["register_error"])
             time.sleep(2)
-            self.clear_screen()
+            clear_screen()
             self.register_user()
 
     def authenticate_user(self) -> bool:
@@ -61,7 +55,7 @@ class LoginAuth:
         This function authenticates a user
         :return: The function `authenticate_user` returns a boolean value (`True` or `False`).
         """
-        self.clear_screen()
+        clear_screen()
         email = input(self.messages["email"])
         password = getpass.getpass(self.messages["password"])
 
@@ -79,7 +73,8 @@ class LoginAuth:
         This function allows a user to change their password by inputting their email, current password,
         and new password.
         """
-        self.clear_screen()
+        clear_screen()
+
         try:
             email = input(self.messages["email"])
             password = getpass.getpass(self.messages["password"])
@@ -93,12 +88,12 @@ class LoginAuth:
                     save_config(self.config)
                     print(self.responses["change_password_ok"])
                     time.sleep(2)
-                    self.clear_screen()
+                    clear_screen()
                     break
                 else:
                     print(self.responses["change_password_error"])
                     time.sleep(2)
-                    self.clear_screen()
+                    clear_screen()
         except:
             print(self.responses["change_password_error"])
             time.sleep(2)

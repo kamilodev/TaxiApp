@@ -1,15 +1,10 @@
-from PyInquirer import prompt
+from Models.DataTrip import DataTrip
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
-from Controllers.ControlHistory import *
+from Controllers.ControlHistory import control_history
+from Controllers.AuxFunctions import clear_screen
+from PyInquirer import prompt
 import os
-
-
-def clear_screen():
-    """
-    The function clears the terminal screen in Python.
-    """
-    os.system("cls" if os.name == "nt" else "clear")
 
 
 def print_options():
@@ -33,6 +28,7 @@ def print_options():
                     "Cambiar la contraseña",
                     "Cambiar el precio de las tarifas",
                     "Ver el histórico de trayectos",
+                    "Actualizar la base de datos",
                     "Eliminar el histórico de trayectos",
                     "Realizar los tests",
                     "Ver la documentación",
@@ -52,6 +48,10 @@ def print_options():
         elif answers["Options"] == "Ver el histórico de trayectos":
             clear_screen()
             control_history("show")
+        elif answers["Options"] == "Actualizar la base de datos":
+            clear_screen()
+            DataTrip.update_history_to_mongo()
+            clear_screen()
         elif answers["Options"] == "Eliminar el histórico de trayectos":
             clear_screen()
             control_history("delete")

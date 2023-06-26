@@ -1,6 +1,11 @@
+from Views.PrintValues import show_info
+from datetime import datetime
+from pymongo import MongoClient
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 import json
 import os
-from datetime import datetime
+import time
 
 
 class DataTrip:
@@ -66,3 +71,62 @@ class DataTrip:
 
         with open("history.json", "a") as file:
             file.write("]")
+
+    def save_history_to_mongo(self, json_data: str):
+        data_to_insert = json.loads(json_data)
+        try:
+            client = MongoClient("mongodb://localhost:27017/")
+            db = client["taxi"]
+            collection = db["history"]
+
+            if "taxi" not in client.list_database_names():
+                db = client["taxi"]
+                print("Base de datos 'taxi' creada")
+
+            if "history" not in db.list_collection_names():
+                collection = db["history"]
+                print("Colección 'history' creada")
+
+            collection.insert_one(data_to_insert)
+            print("Historial guardado en la base de datos")
+            show_info(data_to_insert)
+        except:
+            print(f"Error al guardar en la base de datos")
+            try:
+                self.save_history_to_file(json_data)
+                print("Guardado en el archivo local")
+                show_info(data_to_insert)
+            except:
+                print(f"Error al guardar en el archivo local")
+
+    def update_history_to_mongo():
+        try:
+            with open("history.json", "r") as file:
+                history_data = json.load(file)
+            try:
+                print("Conectando a la base de datos...\n")
+                client = MongoClient("mongodb://localhost:27017/")
+                db = client["taxi"]
+                collection = db["history"]
+
+                db_documents = list(collection.find({}, {"_id": 0}))
+
+                for document in history_data:
+                    document_id = document["id"]
+                    if not any(doc["id"] == document_id for doc in db_documents):
+                        collection.insert_one(document)
+                        print("Agregando registro a la base de datos...")
+
+                time.sleep(2)
+                if all(
+                    any(doc["id"] == document["id"] for doc in db_documents)
+                    for document in history_data
+                ):
+                    print("No se encontraron documentos faltantes en la base de datos.")
+                    time.sleep(2)
+            except:
+                print(f"No hay conexión a la base de datos")
+                time.sleep(2)
+        except:
+            print("Aun no hay ningun registro en el historial")
+            time.sleep(2)

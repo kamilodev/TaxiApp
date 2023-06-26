@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-from Controllers.Navigate import Navigate
 from Views.Welcome import AppInstructions
-import warnings, sys
+from Controllers.Navigate import Navigate
+import sys
+import warnings
 
 
 # This class runs a loop that displays a welcome message, opens a log file for warnings, and runs a
