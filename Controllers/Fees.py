@@ -47,20 +47,15 @@ class Fees:
         """
         minutes = seconds // 60
         remaining_seconds = round(seconds % 60, 2)
-        if minutes == 1:
-            minutes_str = " minuto"
-        else:
-            minutes_str = " minutos"
+        minutes_str = " minuto" if minutes == 1 else " minutos"
+        seconds_str = " segundo" if remaining_seconds == 1 else " segundos"
 
-        if remaining_seconds == 1:
-            seconds_str = " segundo"
-        else:
-            seconds_str = " segundos"
-
+        result = f"{int(minutes)}{minutes_str}"
         if minutes >= 1:
-            result = f"{int(minutes)}{minutes_str} y {remaining_seconds}{seconds_str}"
+            result += f" y {remaining_seconds}{seconds_str}"
         else:
             result = f"{remaining_seconds}{seconds_str}"
+
         return result
 
     def end_travel(self):
