@@ -1,5 +1,6 @@
 from Controllers.Fees import Fees
 from config_logger import setup_logger
+from Controllers.DataBase import DataBase
 
 logger = setup_logger()
 
@@ -35,6 +36,8 @@ class ControlTravel:
         else:
             data = self.send_fee.end_travel()
             json_data = data.data_to_json()
-            data.save_history_to_mongo(json_data)
+            data_base = DataBase()
+            data_base.save_history_to_mongo(json_data)
+
             logger.info("Trip ended")
             return False

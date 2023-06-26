@@ -1,9 +1,10 @@
-from Models.DataTrip import DataTrip
+from Controllers.DataBase import DataBase
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
 from Views.Documentation import display_documentation
 from Controllers.ControlHistory import control_history
 from Controllers.AuxFunctions import clear_screen
+from Controllers.AuxFunctions import generate_pdf
 from PyInquirer import prompt
 import os
 
@@ -50,11 +51,11 @@ def print_options():
         elif answers["Options"] == "Ver el histórico de trayectos":
             control_history("show")
         elif answers["Options"] == "Descargar el histórico de trayectos":
-            DataTrip.generate_pdf()
+            generate_pdf()
         elif answers["Options"] == "Eliminar el histórico de trayectos":
             control_history("delete")
         elif answers["Options"] == "Actualizar la base de datos":
-            DataTrip.update_history_to_mongo()
+            DataBase.update_history_to_mongo()
         elif answers["Options"] == "Realizar los tests":
             pass
         elif answers["Options"] == "Ver la documentación":
