@@ -70,7 +70,9 @@ class LoginAuth:
             if user["email"] == email:
                 hashed_password = hashlib.sha256(password.encode()).hexdigest()
                 if user["password"] == hashed_password:
+                    logger.info(f"User {email} authenticated successfully")
                     return True
+        logger.warning(f"Error authenticating with user {email}")
         return False
 
     def change_password(self):
@@ -92,11 +94,13 @@ class LoginAuth:
                     user["password"] = new_hashed_password
                     save_config(self.config)
                     print(self.responses["change_password_ok"])
+                    logger.info(f"User {email} changed password successfully")
                     time.sleep(2)
                     clear_screen()
                     break
                 else:
                     print(self.responses["change_password_error"])
+                    logger.warning(f"Error changing password for user {email}")
                     time.sleep(2)
                     clear_screen()
         except:

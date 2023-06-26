@@ -5,9 +5,12 @@ from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from config_logger import setup_logger
 import json
 import os
 import time
+
+logger = setup_logger()
 
 
 class DataTrip:
@@ -41,6 +44,7 @@ class DataTrip:
             "total_bill_move": self.bill_move,
             "total_bill_total": self.bill_total,
         }
+        logger.info("Data converted to JSON")
         return json.dumps(data, indent=4)
 
     def save_history_to_file(self, json_data: str):
@@ -54,6 +58,7 @@ class DataTrip:
         if not os.path.isfile("history.json"):
             with open("history.json", "w") as file:
                 file.write("[")
+                logger.info("File 'history.json' created")
         else:
             with open("history.json", "r") as file:
                 content = file.read().strip()
@@ -70,6 +75,7 @@ class DataTrip:
             if os.stat("history.json").st_size > 1:
                 file.write(",")
             file.write(json_data)
+            logger.info("Data saved to file 'history.json'")
 
         with open("history.json", "a") as file:
             file.write("]")
@@ -86,20 +92,25 @@ class DataTrip:
             if "taxi" not in client.list_database_names():
                 db = client["taxi"]
                 print("Base de datos 'taxi' creada")
+                logger.info("Database 'taxi' created")
 
             if "history" not in db.list_collection_names():
                 collection = db["history"]
                 print("Colección 'history' creada")
+                logger.info("Collection 'history' created")
 
             collection.insert_one(data_to_insert)
             print("Historial guardado en la base de datos")
+            logger.info("History saved to database")
             show_info(data_to_insert)
         except ServerSelectionTimeoutError:
             print(f"Error al guardar en la base de datos")
+            logger.warning("Error saving to database")
             try:
                 self.save_history_to_file(json_data)
                 print("Guardado en el archivo local")
                 show_info(data_to_insert)
+                logger.info("Saved to local file")
             except:
                 print(f"Error al guardar en el archivo local")
 
@@ -110,7 +121,9 @@ class DataTrip:
                 history_data = json.load(file)
             try:
                 print("Conectando a la base de datos...\n")
-                client = MongoClient("mongodb://localhost:27017/")
+                client = MongoClient(
+                    "mongodb://localhost:27017/", serverSelectionTimeoutMS=5000
+                )
                 db = client["taxi"]
                 collection = db["history"]
 
@@ -121,6 +134,7 @@ class DataTrip:
                     if not any(doc["id"] == document_id for doc in db_documents):
                         collection.insert_one(document)
                         print("Agregando registro a la base de datos...")
+                        logger.info("Adding record to database")
 
                 time.sleep(2)
                 if all(
@@ -128,12 +142,15 @@ class DataTrip:
                     for document in history_data
                 ):
                     print("No se encontraron documentos faltantes en la base de datos.")
+                    logger.info("No missing documents found in database")
                     time.sleep(2)
-            except:
+            except ServerSelectionTimeoutError:
                 print(f"No hay conexión a la base de datos")
+                logger.warning("No connection to database when try to update")
                 time.sleep(2)
         except:
             print("Aun no hay ningun registro en el historial")
+            logger.warning("No records in history")
             time.sleep(2)
         clear_screen()
 
@@ -142,6 +159,7 @@ class DataTrip:
         try:
             with open("history.json", "r") as file:
                 history_data = json.load(file)
+                logger.info("History loaded from file")
 
             # Crear un nuevo archivo PDF
             c = canvas.Canvas("historico.pdf", pagesize=letter)
@@ -197,9 +215,11 @@ class DataTrip:
             # Guardar el archivo PDF y cerrar el lienzo
             c.save()
             print("Archivo PDF generado con éxito")
+            logger.info("PDF file generated successfully")
             time.sleep(2)
             clear_screen()
         except:
             print("Aun no hay ningun registro en el historial")
+            logger.warning("No records in history when generating PDF")
             time.sleep(2)
             clear_screen()
