@@ -3,6 +3,8 @@ from Controllers.AuxFunctions import clear_screen
 import time
 
 
+# The NewPrices class prompts the user to input new stop and move prices, sets them using a method
+# from another class, and prints a success or error message.
 class NewPrices:
     def __init__(self):
         self.reset_prices = Prices()
@@ -14,7 +16,13 @@ class NewPrices:
         }
 
     def get_new_prices(self):
+        """
+        This function prompts the user to input new stop and move prices, sets them using a method from
+        another class, and prints a success or error message.
+        """
         clear_screen()
+
+    def get_new_prices(self):
         stop = float(input(self.messages["new_stop"]))
         move = float(input(self.messages["new_move"]))
 

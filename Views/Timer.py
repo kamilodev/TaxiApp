@@ -1,6 +1,8 @@
 import time
 
 
+# The Timer class calculates and prints the elapsed time for each lap and the total time elapsed since
+# the start of the timer.
 class Timer:
     def __init__(self):
         self.starttime = time.time()
@@ -8,6 +10,12 @@ class Timer:
         self.lapnum = 0
 
     def history_timer(self) -> float:
+        """
+        This function calculates and prints the elapsed time for each lap and the total time elapsed
+        since the start of the timer.
+        :return: the laptime, which is the time elapsed since the last lap or since the start of the
+        timer, depending on whether the lap is even or odd.
+        """
         if self.lapnum == 0:
             self.lapnum += 1
             self.starttime = time.time()

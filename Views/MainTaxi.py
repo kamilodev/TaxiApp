@@ -5,8 +5,14 @@ import sys
 import warnings
 
 
+# This class runs a loop that displays a welcome message, opens a log file for warnings, and runs a
+# navigation function.
 class MainTaxi:
     def main(self):
+        """
+        This function runs an loop that displays a welcome message, opens a log file for
+        warnings, and runs a navigation function.
+        """
         while True:
             welcome = AppInstructions()
             navigate = Navigate()

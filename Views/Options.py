@@ -9,6 +9,10 @@ import os
 
 
 def print_options():
+    """
+    This function presents a menu of options to the user and performs different actions based on the
+    user's selection.
+    """
     from Controllers.LoginAuth import LoginAuth
 
     clear_screen()
