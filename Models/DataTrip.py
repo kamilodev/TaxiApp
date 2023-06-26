@@ -1,6 +1,8 @@
 from Views.PrintValues import show_info
+from Controllers.AuxFunctions import clear_screen
 from datetime import datetime
 from pymongo import MongoClient
+from pymongo.errors import ServerSelectionTimeoutError
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import json
@@ -63,7 +65,9 @@ class DataTrip:
     def save_history_to_mongo(self, json_data: str):
         data_to_insert = json.loads(json_data)
         try:
-            client = MongoClient("mongodb://localhost:27017/")
+            client = MongoClient(
+                "mongodb://localhost:27017/", serverSelectionTimeoutMS=5000
+            )
             db = client["taxi"]
             collection = db["history"]
 
@@ -78,7 +82,7 @@ class DataTrip:
             collection.insert_one(data_to_insert)
             print("Historial guardado en la base de datos")
             show_info(data_to_insert)
-        except:
+        except ServerSelectionTimeoutError:
             print(f"Error al guardar en la base de datos")
             try:
                 self.save_history_to_file(json_data)
@@ -89,6 +93,7 @@ class DataTrip:
 
     def update_history_to_mongo():
         try:
+            clear_screen()
             with open("history.json", "r") as file:
                 history_data = json.load(file)
             try:
@@ -118,3 +123,71 @@ class DataTrip:
         except:
             print("Aun no hay ningun registro en el historial")
             time.sleep(2)
+        clear_screen()
+
+    def generate_pdf():
+        clear_screen()
+        try:
+            with open("history.json", "r") as file:
+                history_data = json.load(file)
+
+            # Crear un nuevo archivo PDF
+            c = canvas.Canvas("historico.pdf", pagesize=letter)
+
+            # Definir el formato y el tamaño de la fuente
+            c.setFont("Helvetica", 12)
+
+            # Número de registros por página
+            registros_por_pagina = 3
+
+            # Posición vertical inicial
+            y = 700
+
+            # Contador de registros en la página actual
+            registros_en_pagina = 0
+
+            # Iterar sobre los documentos del historial
+            for document in history_data:
+                id = document["id"]
+                date = document["today"]
+                total_time = document["total_time"]
+                stop_time = document["total_stopped_time"]
+                move_time = document["total_movement_time"]
+                bill_stop = document["total_bill_stop"]
+                bill_move = document["total_bill_move"]
+                bill_total = document["total_bill_total"]
+
+                # Agregar la información formateada al archivo PDF
+                c.drawString(100, y - 20, f"Id de operacion: {id}")
+                c.drawString(100, y - 40, f"Fecha de registro: {date}")
+                c.drawString(100, y - 70, f"Tiempo total: {total_time}")
+                c.drawString(100, y - 90, f"Tiempo detenido: {stop_time}")
+                c.drawString(100, y - 110, f"Tiempo en movimiento: {move_time}")
+                c.drawString(100, y - 150, f"Tarifa en reposo: {bill_stop}€")
+                c.drawString(100, y - 170, f"Tarifa en movimiento: {bill_move}€")
+                c.drawString(100, y - 190, f"Total a pagar: {bill_total}€")
+                c.drawString(100, y - 210, f"-" * 100)
+
+                # Actualizar la posición vertical
+                y -= 220
+
+                # Incrementar el contador de registros en la página actual
+                registros_en_pagina += 1
+
+                # Comprobar si se ha alcanzado el límite de registros por página
+                if registros_en_pagina == registros_por_pagina:
+                    c.showPage()
+                    # Reiniciar el contador de registros en la página actual
+                    registros_en_pagina = 0
+                    # Reiniciar la posición vertical para la siguiente página
+                    y = 700
+
+            # Guardar el archivo PDF y cerrar el lienzo
+            c.save()
+            print("Archivo PDF generado con éxito")
+            time.sleep(2)
+            clear_screen()
+        except:
+            print("Aun no hay ningun registro en el historial")
+            time.sleep(2)
+            clear_screen()
