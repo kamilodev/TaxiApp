@@ -1,6 +1,7 @@
 from Models.DataTrip import DataTrip
 from Views.MainTaxi import MainTaxi
 from Views.NewPrices import NewPrices
+from Views.Documentation import display_documentation
 from Controllers.ControlHistory import control_history
 from Controllers.AuxFunctions import clear_screen
 from PyInquirer import prompt
@@ -28,8 +29,9 @@ def print_options():
                     "Cambiar la contraseña",
                     "Cambiar el precio de las tarifas",
                     "Ver el histórico de trayectos",
-                    "Actualizar la base de datos",
+                    "Descargar el histórico de trayectos",
                     "Eliminar el histórico de trayectos",
+                    "Actualizar la base de datos",
                     "Realizar los tests",
                     "Ver la documentación",
                     "Salir",
@@ -46,19 +48,17 @@ def print_options():
         elif answers["Options"] == "Cambiar el precio de las tarifas":
             send_prices.get_new_prices()
         elif answers["Options"] == "Ver el histórico de trayectos":
-            clear_screen()
             control_history("show")
-        elif answers["Options"] == "Actualizar la base de datos":
-            clear_screen()
-            DataTrip.update_history_to_mongo()
-            clear_screen()
+        elif answers["Options"] == "Descargar el histórico de trayectos":
+            DataTrip.generate_pdf()
         elif answers["Options"] == "Eliminar el histórico de trayectos":
-            clear_screen()
             control_history("delete")
+        elif answers["Options"] == "Actualizar la base de datos":
+            DataTrip.update_history_to_mongo()
         elif answers["Options"] == "Realizar los tests":
             pass
         elif answers["Options"] == "Ver la documentación":
-            pass
+            display_documentation()
         elif answers["Options"] == "Salir":
             os._exit(0)
 

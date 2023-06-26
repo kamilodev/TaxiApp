@@ -57,8 +57,8 @@ class Fees:
         else:
             seconds_str = " segundos"
 
-        if minutes > 1:
-            result = f"{minutes}{minutes_str} y {remaining_seconds}{seconds_str}"
+        if minutes >= 1:
+            result = f"{int(minutes)}{minutes_str} y {remaining_seconds}{seconds_str}"
         else:
             result = f"{remaining_seconds}{seconds_str}"
         return result
