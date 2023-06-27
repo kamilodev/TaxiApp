@@ -12,6 +12,11 @@ numpy="*"
 opencv-python="*"
 Pillow="*"
 pyinquirer = "*"
+pymongo = "*"
+reportlab = "*"
+rich = "*"
+pytest = "*"
+pytest-mock = "*"
 
 [dev-packages]
 
