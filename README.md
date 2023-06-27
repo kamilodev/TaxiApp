@@ -33,7 +33,7 @@ git clone https://github.com/AI-School-F5-P2/TaxiApp.git
 To run tests, run the following command
 
 ```
-  pytest
+  python App.py --test
 ```
 
 ## View help

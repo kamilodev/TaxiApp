@@ -8,7 +8,13 @@ logger = setup_logger()
 
 class DataTrip:
     def __init__(
-        self, total_time, stop_time, move_time, bill_stop, bill_move, bill_total
+        self,
+        total_time=None,
+        stop_time=None,
+        move_time=None,
+        bill_stop=None,
+        bill_move=None,
+        bill_total=None,
     ):
         self.total_time = total_time
         self.stop_time = stop_time
