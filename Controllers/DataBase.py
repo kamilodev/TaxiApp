@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from Controllers.AuxFunctions import clear_screen
 from Views.PrintValues import show_info
+from Models.DataTrip import DataTrip
 from config_logger import setup_logger
 import time
 import json
@@ -12,6 +13,7 @@ logger = setup_logger()
 class DataBase:
     def save_history_to_mongo(self, json_data: str):
         data_to_insert = json.loads(json_data)
+        save_file = DataTrip()
         try:
             client = MongoClient(
                 "mongodb://localhost:27017/", serverSelectionTimeoutMS=5000
@@ -37,7 +39,7 @@ class DataBase:
             print(f"Error al guardar en la base de datos")
             logger.warning("Error saving to database")
             try:
-                self.save_history_to_file(json_data)
+                save_file.save_history_to_file(json_data)
                 print("Guardado en el archivo local")
                 show_info(data_to_insert)
                 logger.info("Saved to local file")
@@ -80,6 +82,6 @@ class DataBase:
                 time.sleep(2)
         except:
             print("Aun no hay ningun registro en el historial")
-            logger.warning("No records in history")
+            logger.warning("Trying to update dataBase, but not records in history")
             time.sleep(2)
         clear_screen()

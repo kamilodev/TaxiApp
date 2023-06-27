@@ -33,7 +33,7 @@ git clone https://github.com/AI-School-F5-P2/TaxiApp.git
 To run tests, run the following command
 
 ```
-  pytest
+  python App.py --test
 ```
 
 ## View help
@@ -47,38 +47,38 @@ To view help, run the following command
 ## Work Tree
 
 ```
-
 Taxi_Fork
 ├─ .editorconfig
 ├─ App.py
 ├─ Controllers
-│ ├─ AuxFunctions.py
-│ ├─ ControlHistory.py
-│ ├─ ControlTravel.py
-│ ├─ Fees.py
-│ ├─ LoginAuth.py
-│ ├─ Navigate.py
-│ └─ Prices.py
+│  ├─ AuxFunctions.py
+│  ├─ ControlHistory.py
+│  ├─ ControlTravel.py
+│  ├─ Fees.py
+│  ├─ LoginAuth.py
+│  ├─ Navigate.py
+│  └─ Prices.py
+├─ Docs
+│  └─ DOCS.md
 ├─ Models
-│ └─ DataTrip.py
+│  └─ DataTrip.py
 ├─ Pipfile
 ├─ Pipfile.lock
 ├─ README.md
 ├─ Views
-│ ├─ Documentation.py
-│ ├─ MainTaxi.py
-│ ├─ NewPrices.py
-│ ├─ Options.py
-│ ├─ PrintValues.py
-│ ├─ Timer.py
-│ └─ Welcome.py
+│  ├─ Documentation.py
+│  ├─ MainTaxi.py
+│  ├─ NewPrices.py
+│  ├─ Options.py
+│  ├─ PrintValues.py
+│  ├─ Timer.py
+│  └─ Welcome.py
+├─ config_logger.py
 ├─ config_manager.py
-├─ storytime
-│ ├─ 1306-1.png
-│ ├─ 1306-2.png
-│ ├─ 1306-3.png
-│ └─ 1306.png
-└─ taxi.jpg
+├─ taxi.jpg
+└─ test
+   ├─ test_ControlHistory.py
+   └─ test_DataTrip.py
 
 ```
 

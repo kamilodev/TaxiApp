@@ -1,6 +1,6 @@
 import json
 
-CONFIG_FILE = ".config"
+CONFIG_FILE = "./.config"
 
 
 def create_config_file():
